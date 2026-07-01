@@ -15,8 +15,8 @@
 <!-- Reconcile this block after every state change (push/merge/seal/branch). -->
 <!-- Prefer a single live cursor over a pile of dated history blocks. -->
 
-> **▶ CURRENT (2026-07-01):** Pre-work — project just initialised via `keel init`, no
-> milestone started yet.
+> **▶ CURRENT (2026-07-01):** v1 (csv2json) — the design spec is complete and
+> implementation-ready; the implementation plan is next.
 > **Authoritative current cursor = [NEXT-STEPS.md](NEXT-STEPS.md) §1.**
 
 <!-- Optional: collapse older "where we were" notes into ROADMAP.md history, not here. -->

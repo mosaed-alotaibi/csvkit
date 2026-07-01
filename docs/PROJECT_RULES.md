@@ -74,6 +74,15 @@ copy them here — read them at their canonical location so updates flow through
 - 2026-07-01 — mosalotaibi: {{DECISION}} (rationale, scope).
 -->
 
+### Environment / stack conventions
+
+- **Stdlib only, no third-party dependencies.** No `pip install`, no `requirements.txt`,
+  no `pyproject.toml` (until BL-005 makes packaging a real need). Every module in
+  `csvkit/` must run on a bare Python 3 interpreter. Rationale: this is a small,
+  install-free CLI — a dependency is a cost (supply chain, version drift, an install
+  step for something meant to be zero-friction) that isn't paid for by any concrete need
+  yet (YAGNI).
+
 ### Locked decisions
 
 - **2026-07-01 — mosalotaibi:** Keelwright core/adapter paths above are pinned to the

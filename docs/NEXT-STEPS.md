@@ -35,27 +35,36 @@
      Keep it tight. Push detail into specs/plans/archive and link out.
      ============================================================================ -->
 
-> **▶ CURRENT INITIATIVE (2026-07-01) — bootstrap.**
-> GOAL: stand up the project skeleton and a green baseline before the v1 (csv2json) milestone.
-> STATE: DESIGN-FIRST — baseline established; about to brainstorm v1 scope.
+> **▶ CURRENT INITIATIVE (2026-07-01) — v1 (csv2json).**
+> GOAL: ship a v1 CLI that converts a CSV file to JSON.
+> STATE: SPECCED — `docs/spec-and-plan/SPEC.md` is complete and implementation-ready.
 >
-> **Audited maturity / readiness:** scaffold ~100% · v1 feature ~0%.
-> Current gates: green baseline (1/1 test passing); no spec/plan yet.
+> **Audited maturity / readiness:** scaffold ~100% · spec ~100% · plan/execution ~0%.
+> Current gates: green baseline (1/1 test passing); spec passed a 7-round fresh-context
+> review cadence (6 independent from-scratch implementations found and fixed real
+> defects across rounds 1–6; round 7 found the spec's *content* clean but flagged this
+> cursor itself as stale — see `docs/spec-and-plan/SPEC.md` §9 for the full log). No
+> plan written yet.
 >
 > **Workstreams / open gaps (evidence-backed):**
-> - **A · v1 scope** — not yet brainstormed; no SPEC.md written yet.
+> - **A · implementation plan** — SPEC.md is done; PLAN.md is still the raw template
+>   scaffold (`{{FEATURE_NAME}}` etc.) and needs to be written next.
 >
 > **Locked architecture / decisions (do not relitigate):** Python 3, stdlib only, no
-> third-party dependencies (see `docs/PROJECT_RULES.md` for the rationale).
+> third-party dependencies (see `docs/PROJECT_RULES.md`); the full csv2json design in
+> `docs/spec-and-plan/SPEC.md` §3 (16 settled decisions) — don't relitigate without a
+> new real case per the tight-scope/YAGNI principle.
 
-**▶ NEXT ACTION (who owns it):** Brainstorm the v1 (csv2json) scope, then write SPEC.md — owner: whoever picks up this project next.
+**▶ NEXT ACTION (who owns it):** Write `docs/spec-and-plan/PLAN.md` from the settled SPEC.md, then run its own review cadence — owner: whoever picks up this project next.
 
 <!-- Below the live cursor, keep a short DONE record of recently-completed milestones,
      newest first, each one line with its proof + branch. Mark superseded cursors
      HISTORICAL rather than deleting them — a cold reader needs to trust that the old
      lines were true when written. -->
 
+> **✅ DONE — SPEC.md (v1 csv2json)** *(branch `main`, 2026-07-01)*: converged after 7 review rounds (6 independent from-scratch implementations, 0 runtime defects remaining as of round 7); see `docs/spec-and-plan/SPEC.md` §9.
 > **✅ DONE — Bootstrap** *(branch `main`, committed 2026-07-01)*: `keel init` run, doc funnel installed, package scaffold + test harness in place, baseline green (`python3 -m unittest discover -s tests -v` → 1/1 passing).
+> **⚠ HISTORICAL** — "Pre-work — about to brainstorm v1 scope" (true on 2026-07-01 at bootstrap; superseded by the live cursor above once SPEC.md was written and reviewed).
 
 **▶ RESUME PROMPT — paste in a clean session to continue this initiative:**
 

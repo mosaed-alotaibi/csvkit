@@ -27,6 +27,11 @@
 
 | ID | Title | Type | Status | Why | Future context | Source |
 |---|---|---|---|---|---|---|
+| **BL-001** | `json2csv` (reverse of csv2json) | feature | parked | v1 only ships one direction (csv→json); a real second direction hasn't been needed yet. | A new `csvkit/convert.py` function `json_to_csv_rows` + a `json2csv` subcommand in `cli.py`, mirroring csv2json's structure (module layout, error handling, CLI contract). | `docs/spec-and-plan/SPEC.md` §1 |
+| **BL-002** | `--infer-types` flag | enhancement | parked | v1 keeps every value a JSON string (safe default — e.g. avoids mangling a zip code's leading zero); type inference is ambiguous and deferred until a real consumer needs typed JSON. | An opt-in flag on `csv2json` that attempts int → float → bool → string coercion per cell, strictly additive (default behavior unchanged). | `docs/spec-and-plan/SPEC.md` §1, §3 decision 3 |
+| **BL-003** | `--delimiter` flag (semicolon/tab) | enhancement | parked | v1 is comma-only; no real non-comma input file has shown up yet. | Pass a custom `delimiter=` through to `csv.reader`/`csv.writer`; stdlib already supports this natively — small change once needed. | `docs/spec-and-plan/SPEC.md` §1 |
+| **BL-004** | `--no-header` mode | enhancement | parked | v1 always assumes row 1 is the header; no real headerless input file has shown up yet. | Output would need synthetic keys (e.g. `col1`, `col2`, ...) instead of real header names; needs its own design pass for key-naming. | `docs/spec-and-plan/SPEC.md` §1 |
+| **BL-005** | pip-installable packaging | enhancement | parked | v1 runs via `python3 -m csvkit`, which needs no packaging step; no use outside this checkout exists yet. | Add `pyproject.toml` with a console-script entry point (`csvkit = csvkit.cli:main`) once the tool is actually used from outside this repo. | `docs/spec-and-plan/SPEC.md` §1 |
 <!-- Add rows below. Keep IDs sequential and permanent. Example row (commented out): -->
 <!--
 | **BL-001** | {{SHORT_TITLE}} | {{feature \| enhancement \| removed-deferred}} | {{parked \| planned \| in-progress \| done \| dropped}} | {{WHY_IT_IS_HERE — for removed-deferred, what was removed and why; for features, the gap}} | {{WHAT_DOING_IT_LATER_LOOKS_LIKE — concrete enough to act on cold}} | {{LINKS — spec section, file path, the milestone/lesson that surfaced it}} |
