@@ -47,13 +47,13 @@
 > Current gates: green baseline (1/1 test passing); the review cadence itself has
 > **not yet** hit its 2-consecutive-clean exit — rounds 1–6 found real content defects;
 > round 7 found content clean but 2 front-door files stale (fixed); round 8 found content
-> clean but a 3rd front-door file stale (fixed); **round 9 was the first fully clean
-> round (streak 1/2)**; round 10 reset the streak — a genuine content blocker (the
-> flush() gap) plus this cursor itself going stale *again* (the exact recurring pattern
-> the carry-forward checklist exists to prevent — see the lessons-learned entry). Both
-> fixed. See `docs/spec-and-plan/SPEC.md` §9 for the full round-by-round log.
-> **Next: two consecutive genuinely clean rounds are needed to converge the cadence
-> formally — round 11 restarts the attempt.** No plan written yet.
+> clean but a 3rd front-door file stale (fixed); round 9 was the first fully clean round
+> (streak 1/2); round 10 reset the streak — a genuine content blocker (the flush() gap)
+> plus this cursor itself going stale *again* (see the lessons-learned entry); **round 11
+> was the first fully spotless round of the whole cadence — zero findings, not even a
+> minor (streak 1/2 again).** See `docs/spec-and-plan/SPEC.md` §9 for the full log.
+> **Next: round 12 is the confirming attempt at the second consecutive clean round.**
+> No plan written yet.
 >
 > **Workstreams / open gaps (evidence-backed):**
 > - **A · implementation plan** — SPEC.md is done; PLAN.md is still the raw template
