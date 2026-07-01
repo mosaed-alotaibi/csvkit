@@ -59,3 +59,32 @@ rounds 7–9. The blockers and fixes that surfaced.
    **Lesson:** don't let a review log assert a specific count unless something is
    actually counting — a qualitative claim ("several independent implementations, zero
    defects") is more honest than a precise-sounding number with no ledger behind it.
+
+6. **Issue:** the carry-forward checklist added in round 8 (naming all three
+   front-door surfaces explicitly, specifically to stop this from recurring) was
+   itself violated by round 9's own commit — `docs/NEXT-STEPS.md` was the one surface
+   not touched, even though the other two were reconciled correctly. A written
+   checklist did not, by itself, guarantee the sweep actually happened.
+   **Mitigation:** reconciled `docs/NEXT-STEPS.md` in round 10; no further process
+   change beyond re-emphasizing the checklist, since the checklist's content was
+   already correct — the miss was execution, not a missing rule.
+   **Lesson:** a carry-forward checklist reduces the *chance* of a miss; it doesn't
+   eliminate it. The real backstop is the review cadence itself catching what a
+   single pass misses — which is exactly what happened here. Don't treat "we wrote
+   a checklist for this" as proof the class of bug is closed.
+
+7. **Issue:** the `BrokenPipeError` fix (lesson 3 above) was itself incomplete —
+   `sys.stdout.write()` doesn't reliably raise `BrokenPipeError` for ordinary-sized
+   output (Python buffers stdout; the exception only surfaces at interpreter
+   shutdown, outside any `except` block, leaking "Exception ignored" + exit 120).
+   The bug survived 9 rounds because every test of it used a large fixture (which
+   happens to force a synchronous OS-level write), never an ordinary small one.
+   **Mitigation:** added `sys.stdout.flush()` immediately after the write, inside
+   the `try` — the exact line the cited Python SIGPIPE recipe uses and which the
+   spec's prose had omitted despite citing the recipe; added a §7 test using a
+   *small* fixture specifically, not just a large one.
+   **Lesson:** a verification test's *choice of fixture size/shape* can silently
+   avoid the exact code path a fix depends on. When citing an external "official"
+   recipe, transcribe **every** line of it, not just the parts that look load-bearing
+   at a glance — and test the common case (small input), not just the case that's
+   easiest to make deterministic (large input).

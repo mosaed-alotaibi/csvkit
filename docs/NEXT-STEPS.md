@@ -40,15 +40,20 @@
 > STATE: SPECCED — `docs/spec-and-plan/SPEC.md` is complete and implementation-ready.
 >
 > **Audited maturity / readiness:** scaffold ~100% · spec content ~100% (several
-> independent from-scratch implementations across rounds 3–8 found zero remaining
-> runtime defects) · plan/execution ~0%.
+> independent from-scratch implementations across rounds 3–10 found and fixed every
+> runtime defect surfaced, most recently a `sys.stdout.flush()` gap in the
+> `BrokenPipeError` handling — round 10 — that silently only worked for large output)
+> · plan/execution ~0%.
 > Current gates: green baseline (1/1 test passing); the review cadence itself has
-> **not yet** hit its 2-consecutive-clean exit — rounds 1–6 found real content defects,
-> round 7 found the spec's *content* clean but the front-door docs stale (2 files fixed),
-> round 8 found content clean again but a *third* front-door file still stale (fixed) plus
-> a minor log-accuracy nit (fixed) — see `docs/spec-and-plan/SPEC.md` §9 for the full log.
-> **Next: one more genuinely clean round is needed to converge the cadence formally.**
-> No plan written yet.
+> **not yet** hit its 2-consecutive-clean exit — rounds 1–6 found real content defects;
+> round 7 found content clean but 2 front-door files stale (fixed); round 8 found content
+> clean but a 3rd front-door file stale (fixed); **round 9 was the first fully clean
+> round (streak 1/2)**; round 10 reset the streak — a genuine content blocker (the
+> flush() gap) plus this cursor itself going stale *again* (the exact recurring pattern
+> the carry-forward checklist exists to prevent — see the lessons-learned entry). Both
+> fixed. See `docs/spec-and-plan/SPEC.md` §9 for the full round-by-round log.
+> **Next: two consecutive genuinely clean rounds are needed to converge the cadence
+> formally — round 11 restarts the attempt.** No plan written yet.
 >
 > **Workstreams / open gaps (evidence-backed):**
 > - **A · implementation plan** — SPEC.md is done; PLAN.md is still the raw template
@@ -66,7 +71,7 @@
      HISTORICAL rather than deleting them — a cold reader needs to trust that the old
      lines were true when written. -->
 
-> **✅ DONE — SPEC.md content** *(branch `main`, 2026-07-01)*: zero runtime defects across several independent from-scratch implementations (rounds 3–8); the review *cadence* itself is still converging on the surrounding doc funnel — see `docs/spec-and-plan/SPEC.md` §9.
+> **✅ DONE — SPEC.md content** *(branch `main`, 2026-07-01)*: zero outstanding runtime defects across several independent from-scratch implementations (rounds 3–10, most recently the round-10 `sys.stdout.flush()` fix); the review *cadence* itself is still converging (streak reset at round 10) — see `docs/spec-and-plan/SPEC.md` §9.
 > **✅ DONE — Bootstrap** *(branch `main`, committed 2026-07-01)*: `keel init` run, doc funnel installed, package scaffold + test harness in place, baseline green (`python3 -m unittest discover -s tests -v` → 1/1 passing).
 > **⚠ HISTORICAL** — "Pre-work — about to brainstorm v1 scope" (true on 2026-07-01 at bootstrap; superseded by the live cursor above once SPEC.md was written and reviewed).
 

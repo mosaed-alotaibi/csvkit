@@ -48,7 +48,7 @@ This is the **one** canonical map — one doc per concern. No other doc duplicat
 | Implementation plans | [`spec-and-plan/`](spec-and-plan/) <!-- same dir as the row above; split out /plans if you prefer separate trees --> |
 | Per-session lessons learned | [`lessons-learned/`](lessons-learned/) |
 | Operational how-tos | [`guides/`](guides/) |
-| History / superseded docs | [`archive/`](archive/) |
+| History / superseded docs | `archive/` (none yet — see the Archive section below) |
 <!-- | External-dependency feedback (Ritual 11) | [`EXTERNAL-DEP-FEEDBACK.md`](EXTERNAL-DEP-FEEDBACK.md) | (only if you keep an off-limits-component feedback log) -->
 <!-- | {{CONCERN}} | [`{{DOC}}`]({{DOC}}) | -->
 
