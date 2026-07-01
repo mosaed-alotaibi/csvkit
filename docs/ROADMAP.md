@@ -1,86 +1,37 @@
 # Roadmap — csvkit
 
-<!--
-  The plan + the history. ROADMAP owns the ORDER of work and the honest record of
-  what shipped, what was removed, and what was reprioritized. It does NOT restate
-  item detail — that lives in BACKLOG.md by ID (one canonical location per item).
-
-  Funnel position: BACKLOG → ROADMAP → NEXT-STEPS → PRD.
-  ROADMAP sits in the middle: it pulls prioritized items from BACKLOG and feeds the
-  current cursor to NEXT-STEPS. The authoritative "where we are right now" cursor is
-  NEXT-STEPS §1 — this doc points there, it does not duplicate it.
-
-  Anti-drift: when a milestone state changes (built / shipped / deferred / reverted),
-  reconcile this doc in the same pass. Leave history lines as-is; add new state, don't
-  rewrite the past.
--->
-
-> New here? Open the [docs index](README.md) first, then the resume runbook
-> [`NEXT-STEPS.md`](NEXT-STEPS.md).
-> **Last updated:** 2026-07-01 — <!-- one line: the most recent state change + current focus -->
-> **Authoritative current cursor = [`NEXT-STEPS.md` §1](NEXT-STEPS.md).**
+> New here? Open the [docs index](README.md), then the authoritative resume cursor in
+> [`NEXT-STEPS.md` §1](NEXT-STEPS.md).
+> **Last updated:** 2026-07-01 — v1 built; completion ritual in progress.
 > **Plan owner:** mosalotaibi.
 
-This is the **current plan**. No `archive/` yet — this is the project's first milestone,
-so nothing has been superseded (see `docs/NEXT-STEPS.md` §2). Add the archive pointer back
-once something real is superseded.
+ROADMAP owns milestone order and history. Detailed design belongs in the spec, live
+resume state belongs in NEXT-STEPS, and deferred ideas live once in BACKLOG.
 
-## 1. What shipped (Delivered)
+## Milestones
 
-<!-- The done work, newest-relevant first or in phase order. Each row: what + the
-     honest state (with the proof — test count, gate passed, live-verified). Link to
-     archived handoff notes rather than inlining detail. -->
-
-As-built detail: [`PRD.md`](PRD.md).
-
-| Phase / Milestone | What | State |
+| Milestone | What | State and proof |
 |---|---|---|
-| {{PHASE_OR_MS}} | {{WHAT_WAS_BUILT}} | ✅ {{PROOF}} |
-| {{PHASE_OR_MS}} | {{WHAT_WAS_BUILT}} | ✅ {{PROOF}} |
-| {{PHASE_OR_MS}} | {{WHAT_WAS_BUILT}} | ✅ {{PROOF}} |
+| Bootstrap | Keelwright doc funnel, package scaffold, and test harness | ✅ DONE — `keel init`; baseline committed |
+| v1 design | `csv2json` behavior and execution plan | ✅ DONE — [SPEC](spec-and-plan/SPEC.md) converged after 12 rounds; [PLAN](spec-and-plan/PLAN.md) converged after 6 |
+| v1 build | Stdlib-only CSV-to-JSON conversion and CLI | **BUILT — AWAITING SEAL** on `codex/csv2json`; 38 tests pass and the CLI is live-verified |
 
-## 2. Planned milestones (the real plan)
+## Current milestone — v1 seal
 
-<!-- The forward plan, ordered. Each milestone: a status tag in parentheses
-     (planned / in-progress / BUILT-not-merged / DONE), the goal in one or two
-     sentences, and pointers to its spec/plan if they exist. Reference removed items
-     by BL-id; record the milestone's removed/deferred items in §2.1, not inline. -->
+Run the Keelwright completion ritual against the implementation, tests, as-built docs,
+and user-facing CLI. Exit only after the configured review floor and two consecutive
+clean rounds, then reconcile the front door and record the sealed evidence.
 
-- **{{MILESTONE_NAME}}** *(status: {{PLANNED | IN-PROGRESS | BUILT-NOT-MERGED | DONE}}; on branch `{{BRANCH}}`)*.
-  {{GOAL_IN_ONE_OR_TWO_SENTENCES}}. Spec [`{{SPEC_PATH}}`]({{SPEC_PATH}}) · plan [`{{PLAN_PATH}}`]({{PLAN_PATH}}).
-  - **Removed (recorded in [`BACKLOG.md`](BACKLOG.md) by BL-id — see §2.1):** {{SUMMARY}} ({{BL-IDS}}).
-  - **Kept / clarified:** {{WHAT_STAYED_AND_WHY}}.
-  - **Added:** {{NEW_CAPABILITY}}.
-- **{{NEXT_MILESTONE_NAME}}** *(status: {{...}})*. {{GOAL}}.
+Spec: [`spec-and-plan/SPEC.md`](spec-and-plan/SPEC.md) · plan:
+[`spec-and-plan/PLAN.md`](spec-and-plan/PLAN.md) · as-built contract:
+[`PRD.md`](PRD.md).
 
-### 2.1 Removed / Deferred record — {{MILESTONE_NAME}}
+## Deferred from v1
 
-<!-- Honest record of what a milestone removed. Detail lives ONCE in BACKLOG.md by
-     BL-id (this references by ID, it does not restate). Distinguish "parked
-     (backlogged)" from "intentionally removed, NOT backlogged". -->
+The canonical details remain in [`BACKLOG.md`](BACKLOG.md): BL-001 through BL-005.
+They are parked, not silently discarded.
 
-| What was removed | Destination |
-|---|---|
-| {{REMOVED_ITEM}} | → **{{BL-ID}}** (parked) |
-| {{REMOVED_ITEM}} | **NOT backlogged — intentional** ({{WHY_NO_REVIVAL_PATH}}) |
+## How we work
 
-**Kept (not removed):** {{WHAT_STAYED}}.
-
-## 3. Reprioritized backlog (re-framed)
-
-<!-- When a pivot changes the priority of previously-planned work, record the new
-     status here by reference. Don't restate the item — name it and give its new
-     standing (absorbed / lower-priority / blocked / deployment-driven). -->
-
-| Item | New status |
-|---|---|
-| {{ITEM}} | **{{ABSORBED_BY / LOWER-PRIORITY / BLOCKED / DEPLOYMENT-DRIVEN}}** — {{WHY}} |
-| {{ITEM}} | {{...}} |
-
-## 4. How we work
-
-<!-- Point at the Keelwright rituals/rules; do not duplicate them here. -->
-
-Every change goes through the proven loop and the standing rules — see
-[`PROJECT_RULES.md`](PROJECT_RULES.md) (the Keelwright lifecycle loop, review gate, and
-seal ritual). Resume via [`NEXT-STEPS.md`](NEXT-STEPS.md).
+Every change follows the standing rules in [`PROJECT_RULES.md`](PROJECT_RULES.md).
+Resume from [`NEXT-STEPS.md`](NEXT-STEPS.md), never from this historical overview.
