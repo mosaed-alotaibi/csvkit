@@ -1,170 +1,110 @@
 # PRD — csvkit
 
-<!--
-  The Product Requirements Document. Keelwright treats the PRD as a LIVING, AS-BUILT
-  document: it describes what the system IS today, grounded in real artifacts
-  (file paths, endpoints, tools), not what it might become. Deferred capabilities
-  are NOT "unmet requirements" — they live in §9 Future improvements and link out
-  to ROADMAP.md / BACKLOG.md.
-
-  Funnel position (see /Users/mosae/projects/keel/core/01-DOC-MODEL.md for the doc model
-  — the local checkout is named "keel", not "keelwright"; see docs/PROJECT_RULES.md):
-    BACKLOG → ROADMAP → NEXT-STEPS → PRD
-  The PRD is the right end: the canonical record of current as-built requirements.
-
-  Keep status badges honest: ✅ done · ◑ partial · ⛔ deferred/descoped · 🔒 locked.
--->
-
-**Status:** Living — reflects the **as-built** system.
-**Last updated:** 2026-07-01 — <!-- one line: the most recent load-bearing state change -->
+**Status:** Living — reflects the as-built v1 system on branch `codex/csv2json`.
+**Last updated:** 2026-07-01
 **Owner:** mosalotaibi
 
-<!-- If the system exists in more than one as-built shape (e.g. local-dev vs a
-     deployed env) that differ in load-bearing ways, say so HERE in one line and
-     point at the single canonical reconciliation table (§4.1). Do not scatter the
-     deltas across every requirement. -->
-
-> **Scope of this document.** The consolidated, *current* PRD: what the system **is
-> today**. It supersedes any earlier proposal/POC doc for current scope.
-> Companion docs: [`ROADMAP.md`](ROADMAP.md) (plan + history), [`NEXT-STEPS.md`](NEXT-STEPS.md)
-> (resume runbook), [`BACKLOG.md`](BACKLOG.md) (parking lot).
-
----
+> This is the canonical record of what csvkit does today. Planned additions live in
+> [`BACKLOG.md`](BACKLOG.md); the active cursor lives in
+> [`NEXT-STEPS.md`](NEXT-STEPS.md).
 
 ## 1. TL;DR
 
-<!-- 3–6 sentences a new engineer can read in 30s: what the product does, who uses
-     it, the one defining constraint, and the single proof it works. Name the real
-     surfaces (a sign-in, a primary action, the output). No marketing. -->
+csvkit is a zero-dependency Python 3 command-line tool that converts a header-bearing
+CSV file into a JSON array of objects. A user runs
+`python3 -m csvkit csv2json <input.csv>` and receives compact JSON on stdout, or uses
+`--pretty` and `-o/--output` for formatted/file output. It uses only Python's standard
+library and rejects inputs that would otherwise silently lose data.
 
-csvkit is a {{ONE_LINE_PRODUCT_DESCRIPTION}}. A {{PRIMARY_USER}} {{CORE_USER_ACTION}}
-and gets {{CORE_OUTPUT_WITH_ITS_KEY_GUARANTEE}}. {{THE_ONE_DEFINING_CONSTRAINT}}.
+## 2. Users and problem
 
-## 2. Problem & users
-
-<!-- The pain, in concrete terms (what people do by hand today). Name the primary
-     user and the deployment target (single-user / single-tenant / multi-tenant). -->
-
-{{WHAT_USERS_DO_THE_HARD_WAY_TODAY}}. **Primary user:** {{PRIMARY_USER_ROLE}}.
-**Deployment target:** {{TENANCY_AND_SCALE}}.
+The primary user is a developer or operator who needs a deterministic CSV→JSON
+conversion without installing a package or writing one-off parsing code. v1 targets a
+single local user and one file per invocation; it has no server, datastore, network, or
+authentication surface.
 
 ## 3. Goals
 
-<!-- The durable goals, each with an honest status. A goal is a property of the
-     product, not a task. Keep this to the handful that actually shaped the build. -->
-
-| # | Goal | Status |
+| ID | Goal | Status |
 |---|---|---|
-| G1 | {{GOAL_ONE}} | ✅ |
-| G2 | {{GOAL_TWO}} | ◑ |
-| G3 | {{GOAL_THREE}} | ⛔ deferred ({{WHY}}) |
+| G1 | Convert ordinary RFC-4180-style CSV into JSON predictably | ✅ built |
+| G2 | Fail loudly rather than silently losing data on malformed structure | ✅ built |
+| G3 | Remain install-free and third-party-dependency-free | ✅ built |
 
 ## 4. Architecture (as built)
 
-<!-- A small ASCII diagram of the real runtime shape: each tier, its tech as a
-     PLACEHOLDER, the port/surface, and the data flow arrows. Mark any off-limits /
-     vendored component explicitly. Point at a fuller ARCHITECTURE doc if one exists. -->
-
-```
-{{CLIENT_TIER}} — {{WEB_FRAMEWORK}} ({{CLIENT_PORT}})   ── {{CLIENT_RESPONSIBILITIES}}
-   │  {{TRANSPORT_OR_SESSION_MECHANISM}}
-   ▼
-{{SERVICE_TIER}} — {{BACKEND_FRAMEWORK}} / {{DATASTORE}} ({{SERVICE_PORT}})
-   │   {{SERVICE_RESPONSIBILITIES}}
-   ▼
-{{INTEGRATION_TIER}}  ── {{EXTERNAL_SYSTEM_OR_CONNECTOR}}
-   ▼
-{{COMPUTE_OR_MODEL_TIER}} ── {{WHAT_RUNS_HERE}}
+```text
+python3 -m csvkit
+        │
+        ▼
+csvkit/__main__.py ── delegates to cli.main()
+        │
+        ▼
+csvkit/cli.py ── argparse + filesystem I/O + JSON serialization + error messages
+        │
+        ▼
+csvkit/convert.py ── csv.reader + structural validation → list[dict[str, str]]
 ```
 
-{{DATASTORE}} stores {{KEY_ENTITIES}}. Full detail: {{LINK_TO_ARCHITECTURE_DOC}}.
+The module seam is deliberate: `csv_to_json_rows(fileobj)` owns pure conversion;
+`cli.main(argv)` owns paths, encoding/newline handling, stdout/files, and exit codes.
+See [`STACK_WIRING.md`](STACK_WIRING.md) for the exact contract.
 
-### 4.1 Environment split — the as-built reconciliation (canonical)
+## 5. Functional requirements (as built)
 
-<!-- ONLY if the system has >1 as-built shape. This table is the single source of
-     truth for the deltas; every environment-specific claim below should be read
-     against it. Delete this subsection if there is only one shape. -->
-
-| Dimension | {{ENV_A}} (the FRs below) | {{ENV_B}} |
-|---|---|---|
-| {{DIMENSION_1}} | {{ENV_A_VALUE}} | {{ENV_B_VALUE}} |
-| {{DIMENSION_2}} | {{ENV_A_VALUE}} | {{ENV_B_VALUE}} |
-
-Authoritative {{ENV_B}} config = {{POINTER_TO_DEPLOYED_CONFIG}}; current status = {{POINTER_TO_STATUS_DOC}}.
-
-## 5. Functional requirements (implemented)
-
-<!-- Group FRs by area. Each FR: a stable ID (FR1, FR2, …), a short title, the real
-     artifact it lives in (path / endpoint / tool name), and what it actually does.
-     IDs are stable and never reused. Mark deferred FRs ⛔ inline and point at §9. -->
-
-### 5.1 {{AREA_ONE}}
-- **FR1 — {{TITLE}}** (`{{ARTIFACT_PATH_OR_ENDPOINT}}`): {{WHAT_IT_DOES}}.
-- **FR2 — {{TITLE}}** *(⛔ deferred — {{WHY}}; see §9)*: {{WHAT_IT_WOULD_DO}}.
-
-### 5.2 {{AREA_TWO}}
-- **FR3 — {{TITLE}}** (`{{ARTIFACT}}`): {{WHAT_IT_DOES}}.
-
-### 5.3 {{AREA_THREE}}
-- **FR4 — {{TITLE}}** (`{{ARTIFACT}}`): {{WHAT_IT_DOES}}.
-
-<!-- For any area with a notable history (e.g. an audit, a security finding, a
-     reversed decision), add a short blockquote note here recording the finding,
-     what was verified, and what remediated it — with the evidence pointer. -->
+- **FR1 — Module CLI** (`csvkit/__main__.py`, `csvkit/cli.py:main`):
+  `python3 -m csvkit csv2json INPUT` is the supported invocation. A missing or invalid
+  subcommand is an argparse usage error (exit 2), never a traceback.
+- **FR2 — Compact stdout** (`csvkit/cli.py:main`): by default, writes a JSON array with
+  no separator spaces and literal UTF-8 text, followed by one newline.
+- **FR3 — Pretty output** (`csvkit/cli.py:build_parser`, `main`): `--pretty` uses
+  two-space indentation.
+- **FR4 — File output** (`csvkit/cli.py:main`): `-o/--output PATH` writes JSON to that
+  UTF-8 file and leaves stdout empty.
+- **FR5 — CSV parsing** (`csvkit/convert.py:csv_to_json_rows`): supports quoted commas,
+  embedded newlines, and doubled quotes through stdlib `csv.reader`.
+- **FR6 — Structural validation** (`csvkit/convert.py`): rejects a missing/blank
+  header, duplicate columns, and short/long rows with clean, data-row-numbered errors;
+  blank data lines are skipped.
+- **FR7 — Encoding/newline correctness** (`csvkit/cli.py:main`): opens inputs with
+  `encoding="utf-8-sig", newline=""`, stripping an optional BOM and preserving embedded
+  CRLF byte semantics.
+- **FR8 — Failure translation** (`csvkit/cli.py:main`): conversion, decoding, CSV, and
+  filesystem failures produce a one-line stderr message and exit 1. Early-closed pipes
+  exit quietly without interpreter-shutdown noise.
 
 ## 6. Non-functional requirements
 
-<!-- Cross-cutting properties with honest status. Each NFR: a property + how it's
-     held + status. Use ◑ when it's met in practice but not formally measured. -->
-
-| # | Requirement | Status |
+| ID | Requirement | Evidence / status |
 |---|---|---|
-| NFR1 | {{NFR_ONE}} | ✅ |
-| NFR2 | {{NFR_TWO}} | ◑ {{CAVEAT}} |
-| NFR3 | {{NFR_THREE}} | ✅ |
+| NFR1 | Python 3 standard library only | ✅ no third-party imports or dependency manifest |
+| NFR2 | Deterministic behavior | ✅ exact stdout/stderr/exit-code tests |
+| NFR3 | Portable test command | ✅ `python3 -m unittest discover -s tests -v` |
+| NFR4 | No raw traceback for documented user errors | ✅ CLI tests assert clean stderr |
 
-## 7. Data / integrations (current)
+## 7. Verification evidence
 
-<!-- Each live data source / external integration: identity/auth model, scope
-     (read-only vs read-write), and the real endpoint or dataset it touches. -->
+The test suite contains **38 passing tests**: 13 package/conversion tests and 25 CLI
+surface tests. The CLI has also been driven live against a real CSV for compact stdout,
+pretty `-o` output, a missing-file failure, and small-output broken-pipe handling.
 
-- **{{SOURCE_ONE}}** — {{WHAT_AND_WHERE}}. Auth: {{IDENTITY_MODEL}}. Access: {{READ_ONLY_OR_RW}}.
-- **{{SOURCE_TWO}}** — {{WHAT_AND_WHERE}}. Auth: {{IDENTITY_MODEL}}.
+Run:
 
-## 8. Success metrics (as built)
+```sh
+python3 -m unittest discover -s tests -v
+```
 
-<!-- The north-star bar and the ACTUAL measured result. Tie every metric to a
-     reproducible check. If a deliverable gate was passed, record when + how. -->
+## 8. Deferred capabilities
 
-- **North star:** {{TARGET}}. **Actual:** {{MEASURED_RESULT}}.
-- **{{DELIVERABLE_GATE}}:** {{PASS_CRITERIA}} — {{PASSED_WHEN}}.
+| Backlog ID | Capability |
+|---|---|
+| BL-001 | JSON→CSV (`json2csv`) |
+| BL-002 | Opt-in type inference |
+| BL-003 | Custom delimiters |
+| BL-004 | Headerless input mode |
+| BL-005 | Installable packaging / console script |
 
-## 9. Future improvements (deferred — the roadmap)
+## 9. Non-goals
 
-<!-- NOT gaps. Intentional next steps, each with a clear trigger. This is the
-     capability catalog; ROADMAP.md owns the ORDER and BACKLOG.md owns the detail.
-     Reference backlog items by ID — do not restate their detail here. -->
-
-> **Prioritization & milestone framing live in [`ROADMAP.md`](ROADMAP.md); item detail
-> lives in [`BACKLOG.md`](BACKLOG.md) by ID.** This table is the *capability catalog*.
-
-| Area | Improvement | Trigger / notes |
-|---|---|---|
-| {{AREA}} | {{IMPROVEMENT}} ({{BL-ID}}) | {{WHEN_IT_MATTERS}} |
-| {{AREA}} | {{IMPROVEMENT}} ({{BL-ID}}) | {{WHEN_IT_MATTERS}} |
-
-## 10. Out of scope (today)
-
-<!-- Deliberate non-goals for the current shape. State them so they aren't mistaken
-     for omissions. -->
-
-{{NON_GOAL_ONE}}; {{NON_GOAL_TWO}}; {{NON_GOAL_THREE}}.
-
-## 11. Source-of-truth map
-
-<!-- One line per doc, naming which doc is canonical for what. The PRD is canonical
-     for current as-built requirements. Point at the docs front door if you keep one. -->
-
-The canonical doc map lives in {{DOCS_FRONT_DOOR}}. This PRD is canonical for
-**current as-built requirements**; [`ROADMAP.md`](ROADMAP.md) for the plan + history;
-[`NEXT-STEPS.md`](NEXT-STEPS.md) for resume state; [`BACKLOG.md`](BACKLOG.md) for the parking lot.
+Streaming large files, stdin input, remote URLs, schema validation, automatic type
+inference, custom delimiters, and packaging are not part of v1.
