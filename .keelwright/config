@@ -1,0 +1,8 @@
+# Keelwright project — written by `keel init`. Safe to read; safe to edit.
+# This marker is how `keel` recognises an already-initialised project.
+name=csvkit
+slug=csvkit
+owner=mosalotaibi
+created=2026-07-01
+adapter=claude-code
+keelwright_version=0.3.0

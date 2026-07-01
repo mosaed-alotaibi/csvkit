@@ -1,0 +1,28 @@
+{
+  "//": "Keelwright adapter hooks for Claude Code. Merge into <repo>/.claude/settings.json. See hooks/README.md.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "//": "Ritual 10 — state-change currency. Fires after a Bash git push/merge; injects a reconcile reminder.",
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if printf '%s' \"$CLAUDE_TOOL_INPUT\" | grep -Eq 'git[[:space:]]+(push|merge)|git[[:space:]]+.*--ff-only|gh[[:space:]]+pr[[:space:]]+merge'; then printf '%s\\n' 'KEELWRIGHT ritual 10 (state-change currency): a push/merge just happened. Reconcile the front-door docs (NEXT-STEPS cursor, ROADMAP) and any affected auto-memory for now-stale claims. Use drift-proof phrasing. Leave history alone.'; fi"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "//": "Ritual 12 — lessons-learned + durable-notes snapshot. Reminds, snapshots the memory index to .harness/memory-snapshots, and prunes to the newest 20.",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "printf '%s\\n' 'KEELWRIGHT ritual 12 (lessons-learned): before ending, append concise issues/mitigations/lessons to docs/lessons-learned/ and confirm the NEXT-STEPS cursor + auto-memory are current.'; SNAP_DIR=\"${CLAUDE_PROJECT_DIR:-.}/.harness/memory-snapshots\"; mkdir -p \"$SNAP_DIR\" 2>/dev/null && cp \"${CLAUDE_MEMORY_DIR:-$HOME/.claude/memory}/MEMORY.md\" \"$SNAP_DIR/MEMORY.$(date +%Y%m%d-%H%M%S).md\" 2>/dev/null; ls -1t \"$SNAP_DIR\"/MEMORY.*.md 2>/dev/null | tail -n +21 | xargs rm -f 2>/dev/null || true"
+          }
+        ]
+      }
+    ]
+  }
+}
