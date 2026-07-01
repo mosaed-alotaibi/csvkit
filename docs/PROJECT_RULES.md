@@ -94,6 +94,17 @@ copy them here — read them at their canonical location so updates flow through
   it's one-time install output meant for a human to read or copy elsewhere — so
   Ritual 4 ("don't hand-curate tool-owned state") doesn't apply to it.
 
+### Carry-forward checklist (Ritual 12 — promoted, recurring lessons)
+
+- **State-change reconcile: sweep all THREE front-door surfaces, not just two.** This
+  project has three, and a state-change sweep has already missed one twice (round 7
+  missed `README.md`; round 8 caught it): the **root `README.md`** (repo onboarding —
+  the first thing a cold GitHub visitor opens), **`docs/README.md`**'s "Start here"
+  block (the docs-front-door pointer), and **`docs/NEXT-STEPS.md`** §1 (the
+  authoritative cursor, which the other two should point at, not restate). Reconcile
+  all three in the *same* pass after any state change (Ritual 10) — don't stop after
+  updating the ones that come to mind first.
+
 ---
 
 ## Where these rules live
