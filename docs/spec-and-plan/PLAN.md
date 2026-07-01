@@ -96,12 +96,12 @@ python3 -m csvkit csv2json <real-fixture.csv>
 
 - **Files:** `csvkit/convert.py` (new), `tests/test_convert.py` (new)
 - **Steps:**
-  - [ ] Create `csvkit/convert.py` with `EmptyInputError`, `DuplicateHeaderError`,
+  - [x] Create `csvkit/convert.py` with `EmptyInputError`, `DuplicateHeaderError`,
         `RaggedRowError` (SPEC.md §4.2 — transcribe verbatim) and
         `csv_to_json_rows(fileobj) -> list[dict]` (SPEC.md §4.3 — transcribe verbatim,
         including the blank-header check, duplicate-header check, and the
         skip-blank-data-row-before-ragged-check ordering).
-  - [ ] Write behavioral unit tests for every row in SPEC.md §7's "Pure-logic claims"
+  - [x] Write behavioral unit tests for every row in SPEC.md §7's "Pure-logic claims"
         table (11 rows): well-formed CSV → correct dicts; embedded comma + newline;
         escaped (doubled) quote; short ragged row; long ragged row; ragged row reported
         by data-row count when an earlier row has an embedded newline (the combination
@@ -110,7 +110,7 @@ python3 -m csvkit csv2json <real-fixture.csv>
         blank data row skipped + a following ragged row still gets the right data-row
         number.
 - **Verify:** `python3 -m unittest discover -s tests -v` → all `test_convert.py` cases
-  pass (expect 11+ tests: the 10 above, some may be split into 2 assertions each).
+  pass (expect 11+ tests: the 11 above, some may be split into 2 assertions each).
 - **Commit:** `feat: convert.py — CSV parsing, validation, and exception classes`
 
 ### Phase 2 — CLI (`cli.py`, `__main__.py`)
@@ -119,18 +119,18 @@ python3 -m csvkit csv2json <real-fixture.csv>
 
 - **Files:** `csvkit/cli.py` (new), `csvkit/__main__.py` (new), `tests/test_cli.py` (new)
 - **Steps:**
-  - [ ] Create `csvkit/cli.py` with `build_parser()` (SPEC.md §4.4's exact argparse
+  - [x] Create `csvkit/cli.py` with `build_parser()` (SPEC.md §4.4's exact argparse
         contract: `input` positional, `-o/--output`, `--pretty`, subparser
         `required=True` per §3 decision 15) and `main(argv=None) -> int`.
-  - [ ] `main()` opens the input with `encoding="utf-8-sig", newline=""` (§3 decision 9),
+  - [x] `main()` opens the input with `encoding="utf-8-sig", newline=""` (§3 decision 9),
         calls `convert.csv_to_json_rows`, sets `reading_done = True` on success (§3
         decision 13), serializes with the exact compact/pretty `json.dumps` calls (§4.4:
         `separators=(",", ":"), ensure_ascii=False` / `indent=2, ensure_ascii=False`),
         writes to `-o` or stdout.
-  - [ ] **The stdout write MUST be followed by `sys.stdout.flush()` inside the same
+  - [x] **The stdout write MUST be followed by `sys.stdout.flush()` inside the same
         `try`** (§3 decision 16 — this is the exact line that took a dedicated review
         round to catch; omitting it silently breaks the small-output broken-pipe case).
-  - [ ] Handle the 7 exception types/families in the required specificity order (§4.1):
+  - [x] Handle the 7 exception types/families in the required specificity order (§4.1):
         the 3 `convert.py`
         `ValueError`s + `csv.Error` (all formatted `csv2json: {input}: {e}`);
         `UnicodeDecodeError` (hardcoded "not valid UTF-8" message); `BrokenPipeError`
@@ -138,9 +138,9 @@ python3 -m csvkit csv2json <real-fixture.csv>
         **no stderr message**); `OSError` (blanket, `e.strerror`-formatted, using
         `reading_done` + `args.output is not None` to pick one of the three message
         forms in §4.5).
-  - [ ] Create `csvkit/__main__.py` — `from csvkit.cli import main; import sys;
+  - [x] Create `csvkit/__main__.py` — `from csvkit.cli import main; import sys;
         sys.exit(main())`.
-  - [ ] Write CLI-surface tests for every row in SPEC.md §7's table without hardcoding
+  - [x] Write CLI-surface tests for every row in SPEC.md §7's table without hardcoding
         a fragile row count. Drive the real command via `subprocess` against real fixture
         files on disk for every naturally reproducible behavior, inspecting real
         stdout/stderr/exit code. The one deliberate exception is the non-pipe stdout
@@ -168,11 +168,11 @@ python3 -m csvkit csv2json <real-fixture.csv>
 
 - **Files:** `docs/PRD.md`, `docs/AS-BUILT-FOR-QA.md`, `docs/STACK_WIRING.md`
 - **Steps:**
-  - [ ] Fill PRD.md's FRs from the actually-built `csv2json` command (not from SPEC.md's
+  - [x] Fill PRD.md's FRs from the actually-built `csv2json` command (not from SPEC.md's
         intent — from what Tasks 1–2 actually produced; verify by reading the real code).
-  - [ ] Fill AS-BUILT-FOR-QA.md — csv2json is fully implemented, no mock/deferred
+  - [x] Fill AS-BUILT-FOR-QA.md — csv2json is fully implemented, no mock/deferred
         surfaces to flag for v1.
-  - [ ] Fill STACK_WIRING.md — the convert.py/cli.py contract is the only "seam."
+  - [x] Fill STACK_WIRING.md — the convert.py/cli.py contract is the only "seam."
 - **Verify:** every FR cites a real file/function that exists; `grep` confirms no
   `{{PLACEHOLDER}}` remains in the three files.
 - **Commit:** `docs: fill PRD/AS-BUILT-FOR-QA/STACK_WIRING from the real v1 build`
@@ -181,12 +181,12 @@ python3 -m csvkit csv2json <real-fixture.csv>
 
 ## Phase gates
 
-- [ ] All 3 phases' tasks committed.
-- [ ] Test suite green: `python3 -m unittest discover -s tests -v` → all pass, 0
+- [x] All 3 phases' tasks committed.
+- [x] Test suite green: `python3 -m unittest discover -s tests -v` → all pass, 0
       failures.
-- [ ] CLI live-verified with evidence (Ritual 6) — real stdout/stderr/exit-code capture
+- [x] CLI live-verified with evidence (Ritual 6) — real stdout/stderr/exit-code capture
       for the happy path and at least 3 failure modes, pasted into the session record.
-- [ ] Front-door docs + resume cursor reconciled (Ritual 10) — all three front-door
+- [x] Front-door docs + resume cursor reconciled (Ritual 10) — all three front-door
       surfaces (root `README.md`, `docs/README.md`, `docs/NEXT-STEPS.md` §1) updated in
       the same pass, per the carry-forward checklist in `docs/PROJECT_RULES.md`.
 

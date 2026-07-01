@@ -1,8 +1,5 @@
 # csvkit — Agent Operating Guide
 
-<!-- This is the project CLAUDE.md. Claude Code reads it at session start.
-     Fill the {{PLACEHOLDERS}}, delete these comments, commit it to the repo root. -->
-
 Owner: mosalotaibi
 Stack: Python 3 (stdlib only)
 Repo: /Users/mosae/projects/csvkit
@@ -41,7 +38,9 @@ Keelwright's `adapters/claude-code/rules/RITUALS-IN-CLAUDE-CODE.md`. In particul
 
 - **Before any "done" or `/clear`:** run the completion ritual — fresh audit subagents, ≥2 consecutive clean rounds.
 - **For any spec/plan/design you produce:** own the review gate (min 3 iterations, exit on 2 consecutive clean) and run one coherence pass.
-- **For any UI/behavioral surface:** verify live before claiming it works (headless-browser driver in `scripts/`).
+- **For any user-facing behavior:** verify it at the real surface before claiming it
+  works. For this project, drive `python3 -m csvkit csv2json ...` and inspect actual
+  stdout, stderr, output files, and exit codes.
 - **After any state change (push/merge/seal/branch):** reconcile the front-door docs + durable notes so the cursor is never stale.
 - **At session end:** append lessons-learned; keep the handoff current so `/clear` is always safe.
 

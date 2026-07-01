@@ -1,9 +1,9 @@
 # Lessons learned — 2026-07-01 v1 (csv2json) SPEC review cadence
 
 The full completion-ritual cadence (core/03-REVIEW-GATES.md) run against a single, small
-CLI feature spec — 9 rounds, several independent from-scratch implementations, real
-defects found through round 6, then a shift to pure front-door-currency findings in
-rounds 7–9. The blockers and fixes that surfaced.
+CLI feature spec — 12 rounds, several independent from-scratch implementations, and
+real defects found as late as round 10 before rounds 11–12 converged cleanly. The
+blockers and fixes that surfaced.
 
 ### Exception-handling design (Python stdlib)
 

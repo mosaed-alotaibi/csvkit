@@ -45,6 +45,5 @@
      - status `dropped`: an item explicitly killed (keep the row for the trail; say why).
      - Source is mandatory: link the spec/lesson/file that justifies the item. -->
 
-> **Not backlogged (intentional):** {{THINGS_REMOVED_OR_DROPPED_ON_PURPOSE_WITH_NO_REVIVAL_PATH}}.
-> Recording these as backlog items would imply a revival path that doesn't exist, so
-> they live here only as an explicit note — not as `BL-NNN` rows.
+> **Not backlogged (intentional):** None yet. Add an explicit note here only when
+> something is deliberately dropped with no revival path.
