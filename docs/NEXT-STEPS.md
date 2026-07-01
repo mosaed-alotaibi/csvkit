@@ -37,23 +37,19 @@
 
 > **▶ CURRENT INITIATIVE (2026-07-01) — v1 (csv2json).**
 > GOAL: ship a v1 CLI that converts a CSV file to JSON.
-> STATE: SPECCED — `docs/spec-and-plan/SPEC.md` is complete and implementation-ready.
+> STATE: SPECCED, SEALED — `docs/spec-and-plan/SPEC.md`'s review cadence has formally
+> **converged** (12 rounds; rounds 11–12 both fully clean, 2 consecutive as required).
 >
-> **Audited maturity / readiness:** scaffold ~100% · spec content ~100% (several
-> independent from-scratch implementations across rounds 3–10 found and fixed every
-> runtime defect surfaced, most recently a `sys.stdout.flush()` gap in the
-> `BrokenPipeError` handling — round 10 — that silently only worked for large output)
-> · plan/execution ~0%.
-> Current gates: green baseline (1/1 test passing); the review cadence itself has
-> **not yet** hit its 2-consecutive-clean exit — rounds 1–6 found real content defects;
-> round 7 found content clean but 2 front-door files stale (fixed); round 8 found content
-> clean but a 3rd front-door file stale (fixed); round 9 was the first fully clean round
-> (streak 1/2); round 10 reset the streak — a genuine content blocker (the flush() gap)
-> plus this cursor itself going stale *again* (see the lessons-learned entry); **round 11
-> was the first fully spotless round of the whole cadence — zero findings, not even a
-> minor (streak 1/2 again).** See `docs/spec-and-plan/SPEC.md` §9 for the full log.
-> **Next: round 12 is the confirming attempt at the second consecutive clean round.**
-> No plan written yet.
+> **Audited maturity / readiness:** scaffold ~100% · spec ~100% (sealed) ·
+> plan/execution ~0%.
+> Current gates: green baseline (1/1 test passing); SPEC.md's review cadence exited
+> cleanly at round 12 — 8 of the 12 rounds found real, verified defects (3 of them
+> blockers, most notably a `sys.stdout.flush()` gap in `BrokenPipeError` handling that
+> survived 4 implementation attempts because every test used a large fixture); the last
+> 2 rounds were completely spotless. Full round-by-round log in
+> `docs/spec-and-plan/SPEC.md` §9.
+> **Next: write `docs/spec-and-plan/PLAN.md` from the sealed spec, then run its own
+> review cadence.**
 >
 > **Workstreams / open gaps (evidence-backed):**
 > - **A · implementation plan** — SPEC.md is done; PLAN.md is still the raw template
