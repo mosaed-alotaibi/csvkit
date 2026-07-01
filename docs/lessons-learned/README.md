@@ -37,5 +37,5 @@ environment and the next engineer.
 
 <!-- Add one line per session entry, most recent at the top. -->
 
-- [2026-07-01 — {{SESSION_TOPIC}}](2026-07-01-{{TOPIC_SLUG}}.md)
+- [2026-07-01 — v1 (csv2json) SPEC review cadence](2026-07-01-spec-review-cadence.md)
 <!-- - [YYYY-MM-DD — <topic>](YYYY-MM-DD-<topic-slug>.md) -->

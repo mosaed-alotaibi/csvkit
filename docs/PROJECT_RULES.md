@@ -97,8 +97,8 @@ copy them here — read them at their canonical location so updates flow through
 ### Carry-forward checklist (Ritual 12 — promoted, recurring lessons)
 
 - **State-change reconcile: sweep all THREE front-door surfaces, not just two.** This
-  project has three, and a state-change sweep has already missed one twice (round 7
-  missed `README.md`; round 8 caught it): the **root `README.md`** (repo onboarding —
+  project has three, and a state-change sweep has already missed one of them (round 7
+  missed root `README.md`; round 8 caught and fixed it): the **root `README.md`** (repo onboarding —
   the first thing a cold GitHub visitor opens), **`docs/README.md`**'s "Start here"
   block (the docs-front-door pointer), and **`docs/NEXT-STEPS.md`** §1 (the
   authoritative cursor, which the other two should point at, not restate). Reconcile

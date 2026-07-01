@@ -7,7 +7,8 @@
   are NOT "unmet requirements" — they live in §9 Future improvements and link out
   to ROADMAP.md / BACKLOG.md.
 
-  Funnel position (see ../../keelwright/core/01-DOC-MODEL.md for the doc model):
+  Funnel position (see /Users/mosae/projects/keel/core/01-DOC-MODEL.md for the doc model
+  — the local checkout is named "keel", not "keelwright"; see docs/PROJECT_RULES.md):
     BACKLOG → ROADMAP → NEXT-STEPS → PRD
   The PRD is the right end: the canonical record of current as-built requirements.
 

@@ -86,4 +86,6 @@ every other mention references it by ID and never restates the detail.
 
 ## Archive
 
-Historical / superseded docs live in [`archive/`](archive/) (see its index).
+Historical / superseded docs live in `archive/` (see its index) — **nothing archived
+yet**; this is the project's first milestone, so nothing has been superseded. This
+activates once the first doc is.

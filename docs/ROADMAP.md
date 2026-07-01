@@ -21,10 +21,9 @@
 > **Authoritative current cursor = [`NEXT-STEPS.md` §1](NEXT-STEPS.md).**
 > **Plan owner:** mosalotaibi.
 
-This is the **current plan**.
-<!-- If you keep a detailed early/legacy phase map, archive it (don't inline it here)
-     and link the archive directory below. Delete the line if you have no archive. -->
-Older/detailed phase maps are archived under [`archive/`](archive/).
+This is the **current plan**. No `archive/` yet — this is the project's first milestone,
+so nothing has been superseded (see `docs/NEXT-STEPS.md` §2). Add the archive pointer back
+once something real is superseded.
 
 ## 1. What shipped (Delivered)
 
