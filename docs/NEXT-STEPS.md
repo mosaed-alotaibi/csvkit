@@ -37,37 +37,43 @@
 
 > **▶ CURRENT INITIATIVE (2026-07-01) — v1 (csv2json).**
 > GOAL: ship a v1 CLI that converts a CSV file to JSON.
-> STATE: SPECCED, SEALED — `docs/spec-and-plan/SPEC.md`'s review cadence has formally
-> **converged** (12 rounds; rounds 11–12 both fully clean, 2 consecutive as required).
+> STATE: PLANNED — `docs/spec-and-plan/SPEC.md` is sealed and
+> `docs/spec-and-plan/PLAN.md` is implementation-ready; execution is next on
+> `codex/csv2json`.
 >
 > **Audited maturity / readiness:** scaffold ~100% · spec ~100% (sealed) ·
-> plan/execution ~0%.
+> plan ~100% · execution ~0%.
 > Current gates: green baseline (1/1 test passing); SPEC.md's review cadence exited
 > cleanly at round 12 — 8 of the 12 rounds found real, verified defects (3 of them
 > blockers, most notably a `sys.stdout.flush()` gap in `BrokenPipeError` handling that
 > survived 4 implementation attempts because every test used a large fixture); the last
 > 2 rounds were completely spotless. Full round-by-round log in
 > `docs/spec-and-plan/SPEC.md` §9.
-> **Next: write `docs/spec-and-plan/PLAN.md` from the sealed spec, then run its own
-> review cadence.**
+> **Next: create the isolated `codex/csv2json` worktree and execute PLAN.md Task 1
+> test-first.**
 >
 > **Workstreams / open gaps (evidence-backed):**
-> - **A · implementation plan** — SPEC.md is done; PLAN.md is still the raw template
->   scaffold (`{{FEATURE_NAME}}` etc.) and needs to be written next.
+> - **A · implementation** — SPEC.md and PLAN.md are done; code does not exist yet.
 >
 > **Locked architecture / decisions (do not relitigate):** Python 3, stdlib only, no
 > third-party dependencies (see `docs/PROJECT_RULES.md`); the full csv2json design in
 > `docs/spec-and-plan/SPEC.md` §3 (16 settled decisions) — don't relitigate without a
 > new real case per the tight-scope/YAGNI principle.
 
-**▶ NEXT ACTION (who owns it):** Write `docs/spec-and-plan/PLAN.md` from the settled SPEC.md, then run its own review cadence — owner: whoever picks up this project next.
+**▶ NEXT ACTION (who owns it):** Create the isolated `codex/csv2json` worktree, re-run
+the 1-test baseline, then execute PLAN.md Task 1 with strict red→green TDD — owner:
+whoever picks up this project next.
 
 <!-- Below the live cursor, keep a short DONE record of recently-completed milestones,
      newest first, each one line with its proof + branch. Mark superseded cursors
      HISTORICAL rather than deleting them — a cold reader needs to trust that the old
      lines were true when written. -->
 
-> **✅ DONE — SPEC.md content** *(branch `main`, 2026-07-01)*: zero outstanding runtime defects across several independent from-scratch implementations (rounds 3–10, most recently the round-10 `sys.stdout.flush()` fix); the review *cadence* itself is still converging (streak reset at round 10) — see `docs/spec-and-plan/SPEC.md` §9.
+> **✅ DONE — PLAN.md (v1 csv2json)** *(branch `main`, 2026-07-01)*: implementation
+> sequence, file-touch map, TDD checks, and live-verification commands written from the
+> sealed SPEC.md.
+> **✅ DONE — SPEC.md** *(branch `main`, committed 2026-07-01)*: 12-round cadence
+> converged with rounds 11–12 fully clean — see `docs/spec-and-plan/SPEC.md` §9.
 > **✅ DONE — Bootstrap** *(branch `main`, committed 2026-07-01)*: `keel init` run, doc funnel installed, package scaffold + test harness in place, baseline green (`python3 -m unittest discover -s tests -v` → 1/1 passing).
 > **⚠ HISTORICAL** — "Pre-work — about to brainstorm v1 scope" (true on 2026-07-01 at bootstrap; superseded by the live cursor above once SPEC.md was written and reviewed).
 

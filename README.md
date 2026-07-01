@@ -6,8 +6,8 @@ Pure Python 3 standard library — no `pip install` required.
 
 ## Status
 
-The v1 (`csv2json`) design spec is complete and implementation-ready — the
-implementation plan is next. No commands exist yet. See
+The v1 (`csv2json`) design spec and implementation plan are complete and reviewed —
+implementation is next on `codex/csv2json`. No commands exist yet. See
 [`docs/NEXT-STEPS.md`](docs/NEXT-STEPS.md) for the live cursor, or
 [`docs/README.md`](docs/README.md) for the full docs map.
 
