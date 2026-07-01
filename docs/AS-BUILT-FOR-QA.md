@@ -29,7 +29,7 @@ network call, authentication layer, or background process.
 | Validation | empty/blank header; duplicate header; short/long row; blank data line | unit + subprocess CLI tests |
 | Output | compact stdout; `--pretty`; `-o/--output`; literal UTF-8 | subprocess CLI tests + live run |
 | Encoding | UTF-8 BOM stripping; embedded CRLF preservation; invalid UTF-8 error | real on-disk fixtures |
-| Filesystem errors | missing/directory/unreadable input; bad output paths | real on-disk fixtures |
+| Filesystem errors | missing/directory/unreadable input; bad or empty output paths | real on-disk fixtures |
 | Process behavior | argparse exit 2; field-limit `csv.Error`; quiet broken pipe | subprocess tests |
 
 ## 4. Deferred — do not file as v1 bugs
@@ -52,4 +52,4 @@ headerless input, and `BL-005` installable packaging are intentionally parked in
 python3 -m unittest discover -s tests -v
 ```
 
-Expected current evidence: **38 tests, 0 failures**.
+Expected current evidence: **39 tests, 0 failures**.

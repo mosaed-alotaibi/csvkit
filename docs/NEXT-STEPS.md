@@ -19,7 +19,7 @@
 > Durable runbook for resuming after a context reset. Authoritative for "what's next
 > + how to start without breaking what we've done." Pairs with
 > [`PROJECT_RULES.md`](PROJECT_RULES.md) (standing rules). The live contract is the
-> code itself + [`PRD.md`](PRD.md); older handoffs are archived under `archive/`.
+> code itself + [`PRD.md`](PRD.md). No handoffs have been archived yet.
 > **Last updated:** 2026-07-01 — <!-- one line: most recent state; the §1 cursor is authoritative -->
 
 ---
@@ -43,7 +43,7 @@
 >
 > **Audited maturity / readiness:** scaffold ~100% · spec ~100% (sealed) ·
 > plan ~100% · execution ~100% · seal open.
-> Current gates: 38/38 tests passing; the CLI has been live-verified for compact and
+> Current gates: 39/39 tests passing; the CLI has been live-verified for compact and
 > pretty success paths, exact missing-input handling, and silent small-output broken
 > pipes. SPEC.md's review cadence exited
 > cleanly at round 12 — 8 of the 12 rounds found real, verified defects (3 of them
@@ -98,7 +98,7 @@ Repo: /Users/mosae/projects/csvkit. Follow PROJECT_RULES.md; durable notes auto-
 
 GOAL: ship a v1 CLI that converts a CSV file to JSON.
 TODAY: implementation and as-built docs are committed on codex/csv2json. The full
-suite is 38/38 green and the CLI has been exercised at its real surface. The remaining
+suite is 39/39 green and the CLI has been exercised at its real surface. The remaining
 work is the completion ritual, final state reconciliation, and integration decision.
 
 MODE: verify → seal; do not redesign settled v1 behavior without a real defect.
@@ -141,7 +141,7 @@ The reviewer owns the spec/plan/execution review gate. See [`PROJECT_RULES.md`](
 
 ```
 No external dependencies to start — stdlib only, no datastore, no env files.
-python3 -m unittest discover -s tests -v     # expect: Ran 38 tests ... OK  <- known-good line
+python3 -m unittest discover -s tests -v     # expect: Ran 39 tests ... OK  <- known-good line
 ```
 
 There is no long-running server or UI to boot yet — v1 is a CLI invoked per-run.
@@ -159,7 +159,7 @@ difference is your change, not a mystery.
 
 - **Branch convention** — trunk-based on `main`; no protected branches yet (single-dev project).
 - **No off-limits areas yet** — the whole tree is fair game; this section will grow as real constraints emerge.
-- **Additive + tested.** Don't regress the passing test suite (currently 38/38).
+- **Additive + tested.** Don't regress the passing test suite (currently 39/39).
 - **No known flaky tests or ceiling facts yet.**
 - **Push/merge only what the owner approves.** Stop and confirm at every milestone (the seal ritual).
 - **No network access in tests.** csvkit is stdlib-only and offline by design — a test that reaches the network is a bug, not a feature.

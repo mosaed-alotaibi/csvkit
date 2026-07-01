@@ -47,7 +47,7 @@ def main(argv=None) -> int:
         else:
             text = json.dumps(rows, separators=(",", ":"), ensure_ascii=False)
 
-        if args.output:
+        if args.output is not None:
             with open(args.output, "w", encoding="utf-8") as output_file:
                 output_file.write(text)
         else:

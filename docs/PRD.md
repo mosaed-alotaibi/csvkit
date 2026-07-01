@@ -84,7 +84,7 @@ See [`STACK_WIRING.md`](STACK_WIRING.md) for the exact contract.
 
 ## 7. Verification evidence
 
-The test suite contains **38 passing tests**: 13 package/conversion tests and 25 CLI
+The test suite contains **39 passing tests**: 13 package/conversion tests and 26 CLI
 surface tests. The CLI has also been driven live against a real CSV for compact stdout,
 pretty `-o` output, a missing-file failure, and small-output broken-pipe handling.
 

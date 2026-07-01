@@ -32,7 +32,6 @@ not here.
 
 | Guide | What it covers |
 |---|---|
-| [{{GUIDE_FILE}}]({{GUIDE_FILE}}) | {{WHAT_IT_COVERS}} |
 <!-- | [{{GUIDE_FILE}}]({{GUIDE_FILE}}) | {{WHAT_IT_COVERS}} | -->
 
 <!-- No guides yet? Leave the table header and add the first row when the first -->

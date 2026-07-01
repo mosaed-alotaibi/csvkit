@@ -112,6 +112,17 @@ options:
             self.assertEqual(result.stdout, "")
             self.assertEqual(output.read_text(encoding="utf-8"), '[{"name":"Mosae","city":"Riyadh"}]')
 
+    def test_empty_output_path_is_not_silently_treated_as_stdout(self):
+        with tempfile.TemporaryDirectory() as directory:
+            fixture = Path(directory) / "people.csv"
+            fixture.write_text("name,city\nMosae,Riyadh\n", encoding="utf-8")
+
+            result = run_cli("csv2json", fixture, "-o", "")
+
+        self.assert_clean_error(
+            result, "csv2json: cannot write : No such file or directory\n"
+        )
+
     def test_utf8_bom_is_stripped_from_first_header(self):
         with tempfile.TemporaryDirectory() as directory:
             fixture = Path(directory) / "bom.csv"
