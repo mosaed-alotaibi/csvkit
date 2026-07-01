@@ -6,9 +6,10 @@ Pure Python 3 standard library — no `pip install` required.
 
 ## Status
 
-The v1 `csv2json` command is built on `codex/csv2json`: the full automated suite passes
-and the real CLI has been exercised for success and failure paths. The completion ritual
-and project seal are next. See
+The v1 `csv2json` command is ready for integration on `codex/csv2json`: the full
+automated suite passes, the real CLI has been exercised for success and failure paths,
+and the completion review converged. The review record notes that fresh reviewer agents
+were unavailable for the implementation seal. See
 [`docs/NEXT-STEPS.md`](docs/NEXT-STEPS.md) for the live cursor, or
 [`docs/README.md`](docs/README.md) for the full docs map.
 

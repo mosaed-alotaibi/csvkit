@@ -2,7 +2,7 @@
 
 > New here? Open the [docs index](README.md), then the authoritative resume cursor in
 > [`NEXT-STEPS.md` §1](NEXT-STEPS.md).
-> **Last updated:** 2026-07-01 — v1 built; completion ritual in progress.
+> **Last updated:** 2026-07-01 — v1 reviewed and ready for integration.
 > **Plan owner:** mosalotaibi.
 
 ROADMAP owns milestone order and history. Detailed design belongs in the spec, live
@@ -14,13 +14,14 @@ resume state belongs in NEXT-STEPS, and deferred ideas live once in BACKLOG.
 |---|---|---|
 | Bootstrap | Keelwright doc funnel, package scaffold, and test harness | ✅ DONE — `keel init`; baseline committed |
 | v1 design | `csv2json` behavior and execution plan | ✅ DONE — [SPEC](spec-and-plan/SPEC.md) converged after 12 rounds; [PLAN](spec-and-plan/PLAN.md) converged after 6 |
-| v1 build | Stdlib-only CSV-to-JSON conversion and CLI | **BUILT — AWAITING SEAL** on `codex/csv2json`; the full suite passes and the CLI is live-verified |
+| v1 build | Stdlib-only CSV-to-JSON conversion and CLI | **READY FOR INTEGRATION — QUALIFIED SEAL** on `codex/csv2json`; full suite + live CLI + five-round completion review green, with fresh-reviewer caveat recorded |
 
-## Current milestone — v1 seal
+## Current milestone — v1 integration decision
 
-Run the Keelwright completion ritual against the implementation, tests, as-built docs,
-and user-facing CLI. Exit only after the configured review floor and two consecutive
-clean rounds, then reconcile the front door and record the sealed evidence.
+The completion review found and fixed one real CLI defect, then converged. The owner now
+chooses merge, keep branch, or discard. See the dated
+[`completion review`](verification/2026-07-01-v1-completion-review.md) for evidence and
+the explicit fresh-reviewer-independence caveat.
 
 Spec: [`spec-and-plan/SPEC.md`](spec-and-plan/SPEC.md) · plan:
 [`spec-and-plan/PLAN.md`](spec-and-plan/PLAN.md) · as-built contract:

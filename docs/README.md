@@ -15,8 +15,9 @@
 <!-- Reconcile this block after every state change (push/merge/seal/branch). -->
 <!-- Prefer a single live cursor over a pile of dated history blocks. -->
 
-> **▶ CURRENT (2026-07-01):** v1 (csv2json) is built on `codex/csv2json`; the full
-> suite and real CLI checks are green. The completion ritual and project seal are next.
+> **▶ CURRENT (2026-07-01):** v1 (csv2json) is ready for integration on
+> `codex/csv2json`; the full suite, live CLI checks, and completion review are green.
+> Fresh-reviewer independence was unavailable and is recorded as a seal caveat.
 > **Authoritative current cursor = [NEXT-STEPS.md](NEXT-STEPS.md) §1.**
 
 <!-- Optional: collapse older "where we were" notes into ROADMAP.md history, not here. -->
@@ -47,6 +48,8 @@ This is the **one** canonical map — one doc per concern. No other doc duplicat
 | Designs / specs | [`spec-and-plan/`](spec-and-plan/) <!-- specs + plans share this dir; split into spec-and-plan/specs and /plans if you prefer --> |
 | Implementation plans | [`spec-and-plan/`](spec-and-plan/) <!-- same dir as the row above; split out /plans if you prefer separate trees --> |
 | Per-session lessons learned | [`lessons-learned/`](lessons-learned/) |
+| Verification evidence | [`verification/`](verification/) |
+| Keelwright dogfood assessment | [`KEELWRIGHT-ASSESSMENT.md`](KEELWRIGHT-ASSESSMENT.md) |
 | Operational how-tos | [`guides/`](guides/) |
 | History / superseded docs | Future `archive/` directory (none needed yet) |
 <!-- | External-dependency feedback (Ritual 11) | [`EXTERNAL-DEP-FEEDBACK.md`](EXTERNAL-DEP-FEEDBACK.md) | (only if you keep an off-limits-component feedback log) -->
@@ -71,6 +74,7 @@ docs/README.md ─ you are here (front door + source-of-truth map)
    ├─▶ PROJECT_RULES.md  the standing engineering rules
    ├─▶ spec-and-plan/ ─ design specs + implementation plans
    ├─▶ lessons-learned/  per-session issues + mitigations + lessons
+   ├─▶ verification/ ──── dated review evidence + findings ledgers
    │
    └─▶ archive/ ─────── future history / superseded docs (not created yet)
 ```

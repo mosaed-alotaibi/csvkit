@@ -37,12 +37,12 @@
 
 > **▶ CURRENT INITIATIVE (2026-07-01) — v1 (csv2json).**
 > GOAL: ship a v1 CLI that converts a CSV file to JSON.
-> STATE: BUILT — AWAITING SEAL on `codex/csv2json`. Tasks 1–3 are committed: the
-> conversion core, CLI, tests, and as-built docs now exist. The completion ritual is
-> the remaining gate before integration.
+> STATE: READY FOR INTEGRATION — QUALIFIED SEAL on `codex/csv2json`. Tasks 1–3 are
+> committed and the completion review converged after five rounds. Strict fresh-context
+> reviewer independence was unavailable; the evidence record states that limitation.
 >
 > **Audited maturity / readiness:** scaffold ~100% · spec ~100% (sealed) ·
-> plan ~100% · execution ~100% · seal open.
+> plan ~100% · execution ~100% · qualified seal complete.
 > Current gates: 39/39 tests passing; the CLI has been live-verified for compact and
 > pretty success paths, exact missing-input handling, and silent small-output broken
 > pipes. SPEC.md's review cadence exited
@@ -51,20 +51,19 @@
 > survived 4 implementation attempts because every test used a large fixture); the last
 > 2 rounds were completely spotless. Full round-by-round log in
 > `docs/spec-and-plan/SPEC.md` §9.
-> **Next: run the Keelwright completion ritual against the built branch, record the
-> evidence, reconcile the final state, and present the integration decision.**
+> **Next: owner chooses whether to merge into `main`, keep the branch, or discard it.**
 >
 > **Workstreams / open gaps (evidence-backed):**
-> - **A · completion audit** — adversarially trace requirements, test effectiveness,
->   CLI behavior, and doc currency; fix any material finding and restart the clean streak.
+> - **A · integration decision** — the branch is reviewed and committed; merge/keep/
+>   discard remains intentionally owner-gated.
 >
 > **Locked architecture / decisions (do not relitigate):** Python 3, stdlib only, no
 > third-party dependencies (see `docs/PROJECT_RULES.md`); the full csv2json design in
 > `docs/spec-and-plan/SPEC.md` §3 (16 settled decisions) — don't relitigate without a
 > new real case per the tight-scope/YAGNI principle.
 
-**▶ NEXT ACTION (who owns it):** Run and document the completion ritual on
-`codex/csv2json`, then present merge/keep/discard options — owner: the current executor.
+**▶ NEXT ACTION (who owns it):** Choose merge/keep/discard for `codex/csv2json` —
+owner: mosalotaibi. Evidence: [`verification/2026-07-01-v1-completion-review.md`](verification/2026-07-01-v1-completion-review.md).
 
 <!-- Below the live cursor, keep a short DONE record of recently-completed milestones,
      newest first, each one line with its proof + branch. Mark superseded cursors
@@ -83,6 +82,9 @@
 > command, exact error handling, output modes, and live behavior verified.
 > **✅ DONE — Conversion core** *(branch `codex/csv2json`, commit `4f9f323`)*:
 > validation and conversion logic built test-first.
+> **✅ DONE — Completion review** *(branch `codex/csv2json`, 2026-07-01)*: five
+> serialized rounds; Round 1 found and fixed a real CLI bug, Rounds 2–5 clean. Strict
+> fresh-reviewer independence caveat recorded in the evidence ledger.
 > **⚠ HISTORICAL** — "Pre-work — about to brainstorm v1 scope" (true on 2026-07-01 at bootstrap; superseded by the live cursor above once SPEC.md was written and reviewed).
 
 **▶ RESUME PROMPT — paste in a clean session to continue this initiative:**
@@ -93,24 +95,25 @@
      people/constraints, and the literal first step. See §6 for the full template. -->
 
 ```
-RESUME — csvkit: v1 built, awaiting Keelwright seal.
+RESUME — csvkit: v1 ready for integration after a qualified Keelwright seal.
 Repo: /Users/mosae/projects/csvkit. Follow PROJECT_RULES.md; durable notes auto-load (see the adapter for your agent).
 
 GOAL: ship a v1 CLI that converts a CSV file to JSON.
-TODAY: implementation and as-built docs are committed on codex/csv2json. The full
-suite is 39/39 green and the CLI has been exercised at its real surface. The remaining
-work is the completion ritual, final state reconciliation, and integration decision.
+TODAY: implementation, tests, as-built docs, assessment, and completion evidence are on
+codex/csv2json. The full suite is 39/39 green and the CLI has been exercised at its real
+surface. The completion review converged; fresh-reviewer independence was unavailable
+and is explicitly recorded. The only remaining work is the owner integration decision.
 
-MODE: verify → seal; do not redesign settled v1 behavior without a real defect.
+MODE: integration decision; do not redesign settled v1 behavior without a real defect.
 
 FIRST READ (in order): NEXT-STEPS.md §1 → docs/PROJECT_RULES.md →
 docs/spec-and-plan/SPEC.md → docs/spec-and-plan/PLAN.md → csvkit/cli.py.
 
-WORKSTREAMS: A · completion audit and seal.
+WORKSTREAMS: A · owner chooses merge, keep branch, or discard.
 LOCKED DECISIONS: Python 3, stdlib only, no third-party dependencies.
 PEOPLE/CONSTRAINTS: solo project, no external reviewers.
 
-FIRST STEP: run the full suite and begin a fresh requirements/test-effectiveness audit.
+FIRST STEP: read the completion evidence, then execute the owner's integration choice.
 ```
 
 ## 2. Milestone history (condensed)
@@ -119,8 +122,9 @@ FIRST STEP: run the full suite and begin a fresh requirements/test-effectiveness
      beyond the current cursor. One short paragraph or a few lines per milestone,
      with pointers to the archived detail. Don't let this grow unbounded — archive. -->
 
-Bootstrap, design, planning, and implementation completed on 2026-07-01. The first
-milestone is built and awaiting its completion seal; see [`ROADMAP.md`](ROADMAP.md).
+Bootstrap, design, planning, implementation, and qualified completion seal finished on
+2026-07-01. The first milestone is ready for an owner integration decision; see
+[`ROADMAP.md`](ROADMAP.md).
 
 ## 3. The proven loop (how every change is made)
 
